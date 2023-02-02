@@ -2,32 +2,41 @@ require_relative 'node'
 
 class LinkedList
 
-    attr_accessor :head, :tail
+    attr_accessor :head
 
     def initialize
         @head = nil
-        @tail = nil
     end
 
     def append(value)
         node = Node.new(value)
         if @head.nil?
-            @head = value
-            @tail = value
+            @head = node
         else
-            @tail = value
+            present = @head
+            present = present.next_node until present.next_node.nil?
+            present.next_node = node
         end
     end
 
     def prepend(value)
         node = Node.new(value)
         if @head.nil?
-            @head = value
-            @tail = value
+            @head = node
         else
             node.next_node = @head
-            @head = value
+            @head = node
         end
-
     end
+
+    def size
+        count = 0
+        present_node = @head
+        until present_node.nil?
+            count += 1
+            present_node = present_node.next_node
+        end
+        count
+    end
+
 end
