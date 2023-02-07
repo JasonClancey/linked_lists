@@ -46,14 +46,14 @@ class LinkedList
         until present_node.next_node.nil?
             present_node = present_node.next_node
             if present_node.next_node.nil?
-                return present_node.value
+                return present_node
             end
         end
     end
 
     def at(index)
-        return if @head.nil?
-        return "Invalid index" if index.integer? == false
+        return "List is empty." if @head.nil?
+        return "Invalid index." if index.integer? == false
 
         present_node = @head
         if index >= 0
@@ -64,8 +64,31 @@ class LinkedList
             reverse_index = size
             (reverse_index + index).times do
                 present_node = present_node.next_node
-            end            
+            end
         end
         present_node
     end
+
+    def pop
+        return "List is empty." if @head.nil?
+        pop_node = tail
+        new_tail = at(-2)
+        new_tail.next_node = nil
+        pop_node
+    end 
+
 end
+
+
+list = LinkedList.new
+list.prepend(4)
+list.prepend(3)
+list.prepend(2)
+list.prepend(1)
+list.append(5)
+puts list.size
+puts list.tail.value
+puts list.at(0).value
+puts list.at(-2).value
+puts list.pop.value
+puts list.tail.value
