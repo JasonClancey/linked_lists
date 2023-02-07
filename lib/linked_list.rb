@@ -38,6 +38,8 @@ class LinkedList
         end
         count
     end
+    
+    # head implemented via attr_accessor
 
     def tail
         present_node = @head
@@ -49,4 +51,21 @@ class LinkedList
         end
     end
 
+    def at(index)
+        return if @head.nil?
+        return "Invalid index" if index.integer? == false
+
+        present_node = @head
+        if index >= 0
+            index.times do
+                present_node = present_node.next_node
+            end
+        else
+            reverse_index = size
+            (reverse_index + index).times do
+                present_node = present_node.next_node
+            end            
+        end
+        present_node
+    end
 end
