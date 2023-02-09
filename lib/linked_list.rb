@@ -71,14 +71,29 @@ class LinkedList
 
     def pop
         return "List is empty." if @head.nil?
+
         pop_node = tail
         new_tail = at(-2)
         new_tail.next_node = nil
         pop_node
     end 
 
-end
+    def contains?(value)
+        return if @head.nil?
+        present_node = @head
+        until present_node.value == value
+            present_node = present_node.next_node
+            if present_node.value == value
+                return true
+            elsif present_node.next_node.nil?
+                return false
+            end
+        end
+    end
 
+    
+
+end
 
 list = LinkedList.new
 list.prepend(4)
@@ -92,3 +107,5 @@ puts list.at(0).value
 puts list.at(-2).value
 puts list.pop.value
 puts list.tail.value
+puts list.contains?(4)
+puts list.contains?("lol")
