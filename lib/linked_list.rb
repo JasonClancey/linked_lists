@@ -80,6 +80,7 @@ class LinkedList
 
     def contains?(value)
         return if @head.nil?
+
         present_node = @head
         until present_node.value == value
             present_node = present_node.next_node
@@ -91,7 +92,18 @@ class LinkedList
         end
     end
 
-    
+    def find(value)
+        return if @head.nil?
+
+        index = 0
+        present_node = @head
+        until present_node.nil?
+            return index if present_node.value.eql?(value)
+            index += 1
+            present_node = present_node.next_node
+        end
+        nil
+    end
 
 end
 
@@ -109,3 +121,5 @@ puts list.pop.value
 puts list.tail.value
 puts list.contains?(4)
 puts list.contains?("lol")
+puts list.find(1)
+p list.find(5)
